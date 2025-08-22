@@ -8,7 +8,7 @@ public class AtLeastOneTeacherValidator implements ConstraintValidator<AtLeastOn
 
     @Override
     public boolean isValid(CourseRequestDto dto, ConstraintValidatorContext ctx) {
-        if (dto == null) return true; // handled elsewhere
+        if (dto == null) return true;
         boolean hasIds = dto.teachers() != null && !dto.teachers().isEmpty();
         boolean hasNews = dto.newTeachers() != null && !dto.newTeachers().isEmpty();
         return hasIds || hasNews;
