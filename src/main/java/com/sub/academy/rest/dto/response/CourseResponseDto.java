@@ -1,13 +1,13 @@
-package com.sub.academy.rest.dto;
+package com.sub.academy.rest.dto.response;
 
 import com.sub.academy.entity.CourseType;
 
 import java.util.Set;
 import java.util.UUID;
 
-public record CourseDto(UUID id,
-                        String name,
-                        CourseType type,
-                        Set<UUID> studentsIds,
-                        Set<UUID> teachersIds) {
+public record CourseResponseDto(UUID id,
+                                String name,
+                                CourseType type,
+                                Set<UUID> students,
+                                Set<UUID> teachers) {
 }

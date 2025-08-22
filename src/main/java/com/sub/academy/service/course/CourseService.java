@@ -1,4 +1,4 @@
-package com.sub.academy.service;
+package com.sub.academy.service.course;
 
 import com.sub.academy.entity.Course;
 import com.sub.academy.entity.CourseType;

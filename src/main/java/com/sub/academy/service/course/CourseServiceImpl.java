@@ -1,4 +1,4 @@
-package com.sub.academy.service;
+package com.sub.academy.service.course;
 
 import com.sub.academy.entity.Course;
 import com.sub.academy.entity.CourseType;
@@ -17,8 +17,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Optional;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -107,13 +107,13 @@ public class CourseServiceImpl implements CourseService {
 
     private Course toDomain(CourseRequestDto dto) {
         Course course = new Course(dto.name(), dto.type());
+
         if (dto.students() != null) {
             studentRepository.findAllById(dto.students()).forEach(course::addStudent);
         }
 
         if (dto.newStudents() != null) {
-            Set<Student> students = dto.newStudents().stream().map(this::toDomain).collect(Collectors.toSet());
-            course.setStudents(students);
+            dto.newStudents().stream().map(this::toDomain).forEach(course::addStudent);
         }
 
         if (dto.teachers() != null) {
@@ -121,8 +121,7 @@ public class CourseServiceImpl implements CourseService {
         }
 
         if (dto.newTeachers() != null) {
-            Set<Teacher> teachers = dto.newTeachers().stream().map(this::toDomain).collect(Collectors.toSet());
-            course.setTeachers(teachers);
+            dto.newTeachers().stream().map(this::toDomain).forEach(course::addTeacher);
         }
 
         return course;

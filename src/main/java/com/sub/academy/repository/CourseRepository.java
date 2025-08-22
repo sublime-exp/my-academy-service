@@ -1,7 +1,13 @@
-package com.sub.academy.domain.repository;
+package com.sub.academy.repository;
 
-import com.sub.academy.domain.model.Course;
+import com.sub.academy.entity.Course;
+import com.sub.academy.entity.CourseType;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CourseRepository extends JpaRepository<Course, Long> {
+import java.util.UUID;
+
+public interface CourseRepository extends JpaRepository<Course, UUID> {
+
+    Long countByType(CourseType type);
+
 }

@@ -1,9 +1,10 @@
-package com.sub.academy.service;
+package com.sub.academy.service.student;
 
 import com.sub.academy.entity.Student;
 import com.sub.academy.rest.dto.request.StudentRequestDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.UUID;
 
 public interface StudentService {
@@ -18,11 +19,11 @@ public interface StudentService {
 
     void delete(UUID id);
 
-    List<Student> findByCourseId(UUID courseId);
+    Page<Student> findByCourseId(UUID courseId, Pageable pageable);
 
-    List<Student> findByGroup(String group);
+    Page<Student> findByGroup(String group, Pageable pageable);
 
-    List<Student> findStudentsByCourseIdAndGroup(UUID courseId, String group);
+    Page<Student> findStudentsByCourseIdAndGroup(UUID courseId, String group, Pageable pageable);
 
-    List<Student> findByAgeGreaterThanAndCourseId(Integer age, UUID courseId);
+    Page<Student> findByAgeGreaterThanAndCourseId(Integer age, UUID courseId, Pageable pageable);
 }

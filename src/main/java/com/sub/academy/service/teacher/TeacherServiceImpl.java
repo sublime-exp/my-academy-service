@@ -1,4 +1,4 @@
-package com.sub.academy.service;
+package com.sub.academy.service.teacher;
 
 import com.sub.academy.entity.Course;
 import com.sub.academy.entity.Teacher;
@@ -7,11 +7,12 @@ import com.sub.academy.repository.TeacherRepository;
 import com.sub.academy.rest.dto.request.TeacherRequestDto;
 import com.sub.academy.rest.exception.TeacherNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -79,7 +80,7 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public List<Teacher> findTeachersByCourseIdAndGroup(UUID courseId, String group) {
-        return repository.findAllByGroupAndCoursesId(group, courseId);
+    public Page<Teacher> findTeachersByCourseIdAndGroup(UUID courseId, String group, Pageable pageable) {
+        return repository.findAllByGroupAndCoursesId(group, courseId, pageable);
     }
 }

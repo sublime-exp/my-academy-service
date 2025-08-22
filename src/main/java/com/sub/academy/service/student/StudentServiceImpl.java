@@ -1,4 +1,4 @@
-package com.sub.academy.service;
+package com.sub.academy.service.student;
 
 import com.sub.academy.entity.Course;
 import com.sub.academy.entity.Student;
@@ -7,17 +7,18 @@ import com.sub.academy.repository.StudentRepository;
 import com.sub.academy.rest.dto.request.StudentRequestDto;
 import com.sub.academy.rest.exception.StudentNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class StudentServiceImpl implements StudentService{
+public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository repository;
 
@@ -68,24 +69,25 @@ public class StudentServiceImpl implements StudentService{
                 });
     }
 
+
     @Override
-    public List<Student> findByCourseId(UUID courseId) {
-        return repository.findAllByCoursesId(courseId);
+    public Page<Student> findByCourseId(UUID courseId, Pageable page) {
+        return repository.findAllByCoursesId(courseId, page);
     }
 
     @Override
-    public List<Student> findByGroup(String group) {
-        return repository.findAllByGroup(group);
+    public Page<Student> findByGroup(String group, Pageable page) {
+        return repository.findAllByGroup(group, page);
     }
 
     @Override
-    public List<Student> findByAgeGreaterThanAndCourseId(Integer age, UUID courseId) {
-        return repository.findAllByAgeGreaterThanAndCoursesId(age, courseId);
+    public Page<Student> findByAgeGreaterThanAndCourseId(Integer age, UUID courseId, Pageable page) {
+        return repository.findAllByAgeGreaterThanAndCoursesId(age, courseId, page);
     }
 
     @Override
-    public List<Student> findStudentsByCourseIdAndGroup(UUID courseId, String group) {
-        return repository.findAllByGroupAndCoursesId(group, courseId);
+    public Page<Student> findStudentsByCourseIdAndGroup(UUID courseId, String group, Pageable page) {
+        return repository.findAllByGroupAndCoursesId(group, courseId, page);
     }
 
     @Override
